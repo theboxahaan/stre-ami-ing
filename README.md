@@ -6,5 +6,8 @@ Current plan of action is-
 1. Figure out the structure of `nii` files to figure out how to  append them to each other *(if required)*
 2. Write an async coroutine to retrieve chunks from a URL --> append them to each other and re-render.
 3. Using this approach as opposed to sending pre-appended chunks from the server,
-  - The render time becomes $$O(n^2)$$ compared to the data transfer becoming $$O(n^2)$$ in the latter case.
+  - The render time becomes O(n^2) compared to the data transfer becoming O(n^2) in the latter case.
 4. Figure out how Volume Rendering using Ray Marching works. Deep dive into volume rendering a scalar field.
+
+### Note
+> This is not the problem where the rendering is offloaded to the server as discussed [here](https://discourse.threejs.org/t/server-side-rendering-and-sending-data-to-the-client-as-jpeg-or-png-with-client-side-interaction-data/14512/12).
