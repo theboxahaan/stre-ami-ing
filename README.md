@@ -1,5 +1,15 @@
-# `stre-ami-ng` : Streaming Volume Rendering using `AMI.js`
+## `stre-ami-ng` : Streaming Volume Rendering using `AMI.js`
 -----------------
+
+## Setting Up
+I had initial troubles while setting up the examples provided by `three.js` because of browser restrictions and `CORS Policies`.
+Here's what you need to do *(with `python 3`)*
+```bash
+$ cd <into root of repo>
+$ python -m http.server [port number (default 8000)]
+```
+
+
 ## Update 
 Well the current version works with the `NRRDLoader` provided in the `three.js` examples. Plus a simple `scene.add(mesh)` is enought to add a mesh to the existing render without breaking anything.
 #### Observations
