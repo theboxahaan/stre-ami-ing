@@ -123,7 +123,7 @@ function load_nrrd(url, idx)
         const texture = new THREE.DataTexture3D(volume.data, volume.xLength, volume.yLength, volume.zLength);
         texture.format = THREE.RedFormat;
         texture.type = THREE.FloatType;
-        texture.minFilter = texture.magilter = THREE.LinearFilter;
+        texture.minFilter = texture.magFilter = THREE.LinearFilter;
         texture.unpackAlignment = 1;
 
         // Colormap textures
@@ -147,9 +147,10 @@ function load_nrrd(url, idx)
         // Create Mesh
         const geometry = new THREE.BoxBufferGeometry(volume.xLength, volume.yLength, volume.zLength);
         geometry.translate(volume.xLength/2, volume.yLength/2, volume.zLength/2);
+		geometry.computeFaceNormals();
 
         const mesh = new THREE.Mesh(geometry, material);
-        mesh.position.set(10*idx, -volume.yLength/2,-128 - volume.zLength/4);
+        mesh.position.set(9*idx, -volume.yLength/2,-128 - volume.zLength/4);
 
         scene.add(mesh);
         render();
