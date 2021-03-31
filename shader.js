@@ -246,7 +246,7 @@ var VolumeRenderShader1 = {
 		'				N = (2.0 * Nselect - 1.0) * N;	// ==	Nselect * N - (1.0-Nselect)*N;',
 
 		// Init colors
-		'				vec4 ambient_color = vec4(0.0, 0.0, 0.0, 0.0);',
+		'				vec4 ambient_color = vec4(0.2, 0.2, 0.2, 0.0);',
 		'				vec4 diffuse_color = vec4(0.0, 0.0, 0.0, 0.0);',
 		'				vec4 specular_color = vec4(0.0, 0.0, 0.0, 0.0);',
 
