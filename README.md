@@ -1,6 +1,7 @@
-## `stre-ami-ng` : Streaming Volume Rendering using `AMI.js`
------------------
+<img src="https://user-images.githubusercontent.com/32961084/113201567-44f3ca00-9287-11eb-9bdb-f505710cdad9.png" width=75%>
 
+## `stre-ami-ng` : Streaming Volume Rendering using ~~`AMI.js`~~ `three.js`
+-----------------
 ## Setting Up
 I had initial troubles while setting up the examples provided by `three.js` because of browser restrictions and `CORS Policies`.
 Here's what you need to do *(with `python 3`)*
