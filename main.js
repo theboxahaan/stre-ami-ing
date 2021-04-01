@@ -26,7 +26,7 @@ const cmtextures = {
 const shader = VolumeRenderShader1;
 const material_arr = [];
 const gui = new GUI();
-const volconfig = { clim1: 0, clim2: 1, renderstyle: 'iso', isothreshold: 15500, colormap: 'viridis'};
+const volconfig = { clim1: 0, clim2: 1, renderstyle: 'iso', isothreshold: 0, colormap: 'viridis'};
 
 
 function init()
@@ -36,11 +36,11 @@ function init()
 
     //create the renderer
     renderer = new THREE.WebGLRenderer({
-        antialias: true,
-        alpha: true
+        antialias: false,  // set false for performance
+        alpha: true       // set false for performance
     });
     renderer.setClearColor(0x0, 0);
-    renderer.setPixelRatio(window.devicePixelRatio*2.0);
+    renderer.setPixelRatio(window.devicePixelRatio); // sometimes window.devicePixelRatio * 2.0 gives higher FPS
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
@@ -51,7 +51,8 @@ function init()
     //create camera
     camera = new THREE.PerspectiveCamera(5, window.innerWidth/window.innerHeight, 500, 50000);
     camera.position.set(5000, 5000, -800);
-    camera.up.set(0,1,0);
+    // TODO orientation needs to be set according to the data
+    camera.up.set(0,0,1);
 
     //create controls
     controls = new OrbitControls(camera, renderer.domElement);
@@ -75,11 +76,13 @@ function init()
 
 
     // create GUI
-    gui.add(volconfig, 'clim1', 0, 600, 200.00).onChange(updateUniforms);
-    gui.add(volconfig, 'clim2', 0, 600, 200.00).onChange(updateUniforms);
+    // TODO - step size for clim needs to be updated according to the data
+    gui.add(volconfig, 'clim1', 0, 1, 0.50).onChange(updateUniforms);
+    gui.add(volconfig, 'clim2', 0, 1, 0.50).onChange(updateUniforms);
     gui.add(volconfig, 'colormap', {gray: 'gray', viridis: 'viridis', autumn: 'autumn', cool: 'cool' }).onChange(updateUniforms);
     gui.add(volconfig, 'renderstyle', {iso: 'iso', mip:'mip' }).onChange(updateUniforms);
-    gui.add(volconfig, 'isothreshold', 0, 65536, 500).onChange(updateUniforms);
+    // TODO - step size for isothreshold needs to be updated according to the data
+    gui.add(volconfig, 'isothreshold', 0, 1, 0.01).onChange(updateUniforms);
 
 
     // //create a basicbox
@@ -152,7 +155,8 @@ function load_nrrd(url, idx)
 		geometry.computeFaceNormals();
 
         const mesh = new THREE.Mesh(geometry, material);
-        mesh.position.set(9*idx, -volume.yLength/2,-128 - volume.zLength/4);
+        // TODO mesh position offset needs to be set according to the data
+        mesh.position.set(-volume.xLength/2, 32*idx - volume.yLength/2, -volume.zLength/2);
 
         scene.add(mesh);
         render();
@@ -164,9 +168,10 @@ function load_nrrd(url, idx)
 
 function start_load_data()
 {
-    for(var i=0; i<30; i++)
+    for(var i=0; i<4; i++)
     {
-        var filename = 'cscans_ami_' + parseInt(i) +'.nii.gz.nrrd';
+        // TODO set filename according to data 
+        var filename = 'stent_' + parseInt(i) +'.nrrd';
         setTimeout(load_nrrd('http://localhost:9000/plot_data/' + filename, i), 0);
     }
 }
