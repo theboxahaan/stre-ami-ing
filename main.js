@@ -18,7 +18,9 @@ var scene, renderer, camera, controls, stats;
 
 const cmtextures = {
     viridis: new THREE.TextureLoader().load('./textures/cm_viridis.png', render),
-    gray: new THREE.TextureLoader().load('./textures/cm_gray.png', render)
+    gray: new THREE.TextureLoader().load('./textures/cm_gray.png', render),
+    autumn: new THREE.TextureLoader().load('./textures/cm_autumn.png', render),
+    cool: new THREE.TextureLoader().load('./textures/cm_cool.png', render)
 };
 
 const shader = VolumeRenderShader1;
@@ -75,7 +77,7 @@ function init()
     // create GUI
     gui.add(volconfig, 'clim1', 0, 600, 200.00).onChange(updateUniforms);
     gui.add(volconfig, 'clim2', 0, 600, 200.00).onChange(updateUniforms);
-    gui.add(volconfig, 'colormap', {gray: 'gray', viridis: 'viridis' }).onChange(updateUniforms);
+    gui.add(volconfig, 'colormap', {gray: 'gray', viridis: 'viridis', autumn: 'autumn', cool: 'cool' }).onChange(updateUniforms);
     gui.add(volconfig, 'renderstyle', {iso: 'iso', mip:'mip' }).onChange(updateUniforms);
     gui.add(volconfig, 'isothreshold', 0, 65536, 500).onChange(updateUniforms);
 
