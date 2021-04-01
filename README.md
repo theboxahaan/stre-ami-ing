@@ -9,6 +9,7 @@ Here's what you need to do *(with `python 3`)*
 $ cd <into root of repo>
 $ python -m http.server [port number (default 8000)]
 ```
+Get served by navigating to `http://localhost:<port or 8000>/index.html`
 
 
 ## Update 
