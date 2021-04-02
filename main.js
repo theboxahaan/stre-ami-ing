@@ -49,10 +49,9 @@ function init()
     document.body.appendChild(stats.dom);
 
     //create camera
-    camera = new THREE.PerspectiveCamera(5, window.innerWidth/window.innerHeight, 500, 50000);
+    camera = new THREE.PerspectiveCamera(2, window.innerWidth/window.innerHeight, 500, 50000);
     camera.position.set(5000, 5000, -800);
-    // TODO orientation needs to be set according to the data
-    camera.up.set(0,0,1);
+    camera.up.set(1,0,0);
 
     //create controls
     controls = new OrbitControls(camera, renderer.domElement);
@@ -170,8 +169,8 @@ function start_load_data()
 {
     for(var i=0; i<4; i++)
     {
-        // TODO set filename according to data 
-        var filename = 'stent_' + parseInt(i) +'.nrrd';
+        var filename = 'cscans_ami_' + parseInt(i) +'.nii.gz_norm.nrrd';
+        // var filename = 'cscan_norm.nrrd'
         setTimeout(load_nrrd('http://localhost:9000/plot_data/' + filename, i), 0);
     }
 }

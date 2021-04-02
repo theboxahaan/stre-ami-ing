@@ -13,7 +13,7 @@ var VolumeRenderShader1 = {
 	uniforms: {
 		'u_size': { value: new Vector3( 1, 1, 1 ) },
 		'u_renderstyle': { value: 0 },
-		'u_renderthreshold': { value: 15500 },
+		'u_renderthreshold': { value: 0 },
 		'u_clim': { value: new Vector2( 1, 1 ) },
 		'u_data': { value: null },
 		'u_cmdata': { value: null }
@@ -66,7 +66,7 @@ var VolumeRenderShader1 = {
 		'		varying vec4 v_farpos;',
 
 		// The maximum distance through our rendering volume is sqrt(3).
-		'		const int MAX_STEPS = 887;	// 887 for 512^3, 1774 for 1024^3',
+		'		const int MAX_STEPS = 900;	// 887 for 512^3, 1774 for 1024^3',
 		'		const int REFINEMENT_STEPS = 4;',
 		'		const float relative_step_size = 0.50;',
 		'		const vec4 ambient_color = vec4(0.2, 0.4, 0.2, 1.0);',
@@ -246,7 +246,7 @@ var VolumeRenderShader1 = {
 		'				N = (2.0 * Nselect - 1.0) * N;	// ==	Nselect * N - (1.0-Nselect)*N;',
 
 		// Init colors
-		'				vec4 ambient_color = vec4(0.2, 0.2, 0.2, 0.0);',
+		'				vec4 ambient_color = vec4(0.0, 0.0, 0.0, 0.0);',
 		'				vec4 diffuse_color = vec4(0.0, 0.0, 0.0, 0.0);',
 		'				vec4 specular_color = vec4(0.0, 0.0, 0.0, 0.0);',
 
