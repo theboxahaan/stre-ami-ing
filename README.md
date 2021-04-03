@@ -28,14 +28,27 @@ dtype('float32')
 (128, 128, 256)
 >>> data_seg = np.split(data, 4, axis=1)
 >>> for c, i in enumerate(data_seg):
-    ... nrrd.write(f'stent_{c}.nrrd', i, header={'type': 'float', 'endian': 'little', 'encoding': 'gzip'})
+    ... nrrd.write(f'stent_{c}.nrrd', i, header={'type': 'float', 'endian': 'little',\ 
+    'encoding': 'gzip'}, index_ordering = 'C')
 ```
 This snippet basically splits the data into four parts along the `y-axis` each of size 32.
 
 > ***The `type` specified in the header of the `nrrd` file has to be of type `float` i.e `float32` to work with the current poc. Also, the `encoding` needs to be set to `little`.***
 
 --------------
-## Update 
+## Update
+Turns out, for proper LUT function, the scalar value needs to be rescaled to between `0` and `1`.
+So, that is achieved by dividing the entire array with the max value. i.e.
+```python
+# arr is the 3D numpy array containing the scalar field
+>>> arr = arr/arr.max()
+```
+#### Observations
+- This decreases FPS by a significant measure.
+- Need more efficient shader code
+- Textures need to be more efficient *(if possible)*
+
+### `[2.4.21]`
 Well the current version works with the `NRRDLoader` provided in the `three.js` examples. Plus a simple `scene.add(mesh)` is enought to add a mesh to the existing render without breaking anything.
 #### Observations
  - `OrbitControls` is way less computationally expensive as it doesn't need the perpetual `animate` loop unlike the `TrackballControls`
