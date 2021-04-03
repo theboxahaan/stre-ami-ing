@@ -36,6 +36,14 @@ This snippet basically splits the data into four parts along the `y-axis` each o
 > ***The `type` specified in the header of the `nrrd` file has to be of type `float` i.e `float32` to work with the current poc. Also, the `encoding` needs to be set to `little`.***
 
 --------------
+## ToDo
+- Implement quality selection for selecting - float precision `highp, mediump, lowp`, antialiasing, `float relative_step_size` etc. which can set the tradeoff btw quality and performance.
+- Data-shape based settings for camera frustum, rendering depth `MAX_STEPS` etc.
+- Look into mesh *merging* for optimizations
+- Set up a feedback loop for "adaptive streaming"
+
+
+--------------
 ## Update
 Turns out, for proper LUT function, the scalar value needs to be rescaled to between `0` and `1`.
 So, that is achieved by dividing the entire array with the max value. i.e.
