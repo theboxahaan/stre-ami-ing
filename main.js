@@ -36,7 +36,7 @@ function init()
 
     //create the renderer
     renderer = new THREE.WebGLRenderer({
-        antialias: false,  // set false for performance
+        antialias: true,  // set false for performance
         alpha: true       // set false for performance
     });
     renderer.setClearColor(0x0, 0);
@@ -127,7 +127,8 @@ function load_nrrd(url, idx)
         const texture = new THREE.DataTexture3D(volume.data, volume.xLength, volume.yLength, volume.zLength);
         texture.format = THREE.RedFormat;
         texture.type = THREE.FloatType;
-        texture.minFilter = texture.magFilter = THREE.LinearFilter;
+        //TODO - dynamically set NearestFilter vs LinearFilter based on performance vs quality
+        texture.minFilter = texture.magFilter = THREE.NearestFilter;
         texture.unpackAlignment = 1;
 
         // Colormap textures
@@ -138,6 +139,7 @@ function load_nrrd(url, idx)
         uniforms['u_renderstyle'].value = volconfig.renderstyle == 'mip'? 0:1;
         uniforms['u_renderthreshold'].value = volconfig.isothreshold;
         uniforms['u_cmdata'].value = cmtextures[volconfig.colormap];
+        uniforms['u_relative_step_size'].value = 0.5;
         
         // Set Material
         const material = new THREE.ShaderMaterial({
@@ -155,7 +157,7 @@ function load_nrrd(url, idx)
 
         const mesh = new THREE.Mesh(geometry, material);
         // TODO mesh position offset needs to be set according to the data
-        mesh.position.set(-volume.xLength/2, 32*idx - volume.yLength/2, -volume.zLength/2);
+        mesh.position.set(9*idx -volume.xLength/2,  - volume.yLength/2, -volume.zLength/2);
 
         scene.add(mesh);
         render();
@@ -167,7 +169,7 @@ function load_nrrd(url, idx)
 
 function start_load_data()
 {
-    for(var i=0; i<4; i++)
+    for(var i=0; i<30; i++)
     {
         var filename = 'cscans_ami_' + parseInt(i) +'.nii.gz_norm.nrrd';
         // var filename = 'cscan_norm.nrrd'

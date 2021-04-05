@@ -16,7 +16,8 @@ var VolumeRenderShader1 = {
 		'u_renderthreshold': { value: 0 },
 		'u_clim': { value: new Vector2( 1, 1 ) },
 		'u_data': { value: null },
-		'u_cmdata': { value: null }
+		'u_cmdata': { value: null },
+        'u_relative_step_size': {value: 0.5}
 	},
 	vertexShader: [
 		'		varying vec4 v_nearpos;',
@@ -50,8 +51,8 @@ var VolumeRenderShader1 = {
 		'		}',
 	].join( '\n' ),
 	fragmentShader: [
-		'		precision highp float;',
-		'		precision mediump sampler3D;',
+		'		precision lowp float;',
+		'		precision lowp sampler3D;',
 
 		'		uniform vec3 u_size;',
 		'		uniform int u_renderstyle;',
@@ -64,11 +65,12 @@ var VolumeRenderShader1 = {
 		'		varying vec3 v_position;',
 		'		varying vec4 v_nearpos;',
 		'		varying vec4 v_farpos;',
+        '       uniform float u_relative_step_size;',
+
 
 		// The maximum distance through our rendering volume is sqrt(3).
 		'		const int MAX_STEPS = 900;	// 887 for 512^3, 1774 for 1024^3',
 		'		const int REFINEMENT_STEPS = 4;',
-		'		const float relative_step_size = 0.50;',
 		'		const vec4 ambient_color = vec4(0.2, 0.4, 0.2, 1.0);',
 		'		const vec4 diffuse_color = vec4(0.8, 0.2, 0.2, 1.0);',
 		'		const vec4 specular_color = vec4(1.0, 1.0, 1.0, 1.0);',
@@ -83,6 +85,7 @@ var VolumeRenderShader1 = {
 
 
 		'		void main() {',
+        '		float relative_step_size = u_relative_step_size;',
 		// Normalize clipping plane info
 		'				vec3 farpos = v_farpos.xyz / v_farpos.w;',
 		'				vec3 nearpos = v_nearpos.xyz / v_nearpos.w;',
