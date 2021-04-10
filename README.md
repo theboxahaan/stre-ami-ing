@@ -56,6 +56,7 @@ Hypothesis - The only way of getting a seamless render btw two different boxGeo'
 Trying the first approach.
 
 > Question that needs to be answered - Since Texture3D's arg is a `TypeArray` will simple, appending to the trick ?
+> By checking the format for a newly created `nrrd` file in `ascii` encoding, seems to be a simple `np.ravel` of the data inside the 3d array which is the reshaped according to the dimensions specd out in the `header`.
 
 #### First Try
 1. Create a `TypeArray` from data received over socket.
