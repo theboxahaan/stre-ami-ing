@@ -49,7 +49,8 @@ This snippet basically splits the data into four parts along the `y-axis` each o
 ### Observations
 The rendering pipeline works as follows - 
 ```
-   load data --> create 3D texture of data --> create Material using texture --> create boxGeometry / Mesh with Material --> add to Scene --> render
+   load data --> create 3D texture of data --> create Material using texture 
+   --> create boxGeometry / Mesh with Material --> add to Scene --> render
 ```
 Hypothesis - The only way of getting a seamless render btw two different boxGeo's is by creating a new one entirely, or by adding points repeatedly to the same one and re-rendering.
 
