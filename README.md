@@ -45,6 +45,23 @@ This snippet basically splits the data into four parts along the `y-axis` each o
 
 --------------
 ## Update
+
+### Observations
+The rendering pipeline works as follows - 
+```
+   load data --> create 3D texture of data --> create Material using texture --> create boxGeometry / Mesh with Material --> add to Scene --> render
+```
+Hypothesis - The only way of getting a seamless render btw two different boxGeo's is by creating a new one entirely, or by adding points repeatedly to the same one and re-rendering.
+
+Trying the first approach.
+
+> Question that needs to be answered - Since Texture3D's arg is a `TypeArray` will simple, appending to the trick ?
+
+#### First Try
+1. Create a `TypeArray` from data received over socket.
+2. Append data received over socket to the same `TypeArray`
+
+### `[3.4.21]`
 Turns out, for proper LUT function, the scalar value needs to be rescaled to between `0` and `1`.
 So, that is achieved by dividing the entire array with the max value. i.e.
 ```python
