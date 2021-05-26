@@ -59,10 +59,10 @@ Trying the first approach.
 > Question that needs to be answered - Since Texture3D's arg is a `TypeArray` will simple, appending to the trick ?
 > By checking the format for a newly created `nrrd` file in `ascii` encoding, seems to be a simple `np.ravel` of the data inside the 3d array which is the reshaped according to the dimensions specd out in the `header`.
 
-#### First Try
+#### First Try ✔️
 1. Create a `TypeArray` from data received over socket.
 2. Append data received over socket to the same `TypeArray`
-
+> ***This works. Just make sure that the append happens along the correct axis i.e. the most frequently changing axis****
 ### `[3.4.21]`
 Turns out, for proper LUT function, the scalar value needs to be rescaled to between `0` and `1`.
 So, that is achieved by dividing the entire array with the max value. i.e.
